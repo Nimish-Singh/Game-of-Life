@@ -56,7 +56,7 @@ public class Grid {
 
   void show() {
     for (Cell cell : state.keySet()) {
-      System.out.println("new one " + cell + " is " + state.get(cell));
+      System.out.println(cell);
     }
   }
 }

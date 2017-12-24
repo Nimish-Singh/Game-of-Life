@@ -55,6 +55,9 @@ public class Grid {
   }
 
   void show() {
+    if (state.isEmpty()) {
+      System.out.println("No cells survive");
+    }
     for (Cell cell : state.keySet()) {
       System.out.println(cell);
     }

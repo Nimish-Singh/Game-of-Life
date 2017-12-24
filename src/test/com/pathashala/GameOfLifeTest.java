@@ -44,6 +44,16 @@ class GameOfLifeTest {
   }
 
   @Test
+  void expectSinglePointPatternToGiveNoSurvivingCell() {
+    GameOfLife game = new GameOfLife();
+    ArrayList<Cell> cellList = new ArrayList<>();
+    cellList.add(new Cell(1, 1));
+    Grid initial = game.createSeed(cellList);
+    HashMap<Cell, CellStatus> empty = new HashMap<>();
+    assertEquals(new Grid(empty), game.tick(initial));
+  }
+
+  @Test
   void expectBlockPatternToGiveStillLifeOutput() {
     GameOfLife game = new GameOfLife();
     ArrayList<Cell> cellList = new ArrayList<>();

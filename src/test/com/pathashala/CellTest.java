@@ -9,10 +9,12 @@ import static org.junit.jupiter.api.Assertions.*;
 class CellTest {
   @Test
   void expectCorrectNeighboursForCellAt_0_0_() {
-    Cell aCell = new Cell(0, 0);
+    int xCoordinate = 0;
+    int yCoordinate = 0;
+    Cell aCell = new Cell(xCoordinate, yCoordinate);
     ArrayList<Cell> neighbours = new ArrayList<>();
-    for (int i = 0 - 1; i <= 0 + 1; i++) {
-      for (int j = 0 - 1; j <= 0 + 1; j++) {
+    for (int i = xCoordinate - 1; i <= xCoordinate + 1; i++) {
+      for (int j = yCoordinate - 1; j <= yCoordinate + 1; j++) {
         neighbours.add(new Cell(i, j));
       }
     }
@@ -22,10 +24,12 @@ class CellTest {
 
   @Test
   void expectCorrectNeighboursForCellAt_3_4_() {
-    Cell aCell = new Cell(3, 4);
+    int xCoordinate = 3;
+    int yCoordinate = 4;
+    Cell aCell = new Cell(xCoordinate, yCoordinate);
     ArrayList<Cell> neighbours = new ArrayList<>();
-    for (int i = 3 - 1; i <= 3 + 1; i++) {
-      for (int j = 4 - 1; j <= 4 + 1; j++) {
+    for (int i = xCoordinate - 1; i <= xCoordinate + 1; i++) {
+      for (int j = yCoordinate - 1; j <= yCoordinate + 1; j++) {
         neighbours.add(new Cell(i, j));
       }
     }

@@ -10,43 +10,43 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 class GridTest {
   @Test
   void expectEmptyGridAfterTickIfItHasSingleCell() {
-    HashMap<Cell, CellStatus> seed = new HashMap<>();
-    seed.put(new Cell(1, 1), new CellStatus(true));
+    HashMap<Cell, Status> seed = new HashMap<>();
+    seed.put(new Cell(1, 1), new Status(true));
     Grid initial = new Grid(seed);
-    HashMap<Cell, CellStatus> empty = new HashMap<>();
+    HashMap<Cell, Status> empty = new HashMap<>();
     assertEquals(new Grid(empty), initial.changeState());
   }
 
   @Test
   void expectSameGridAfterTickIfItHasFourNeighbouringCells() {
-    HashMap<Cell, CellStatus> seed = new HashMap<>();
-    seed.put(new Cell(1, 1), new CellStatus(true));
-    seed.put(new Cell(1, 2), new CellStatus(true));
-    seed.put(new Cell(2, 1), new CellStatus(true));
-    seed.put(new Cell(2, 2), new CellStatus(true));
+    HashMap<Cell, Status> seed = new HashMap<>();
+    seed.put(new Cell(1, 1), new Status(true));
+    seed.put(new Cell(1, 2), new Status(true));
+    seed.put(new Cell(2, 1), new Status(true));
+    seed.put(new Cell(2, 2), new Status(true));
     Grid initial = new Grid(seed);
     assertEquals(new Grid(seed), initial.changeState());
   }
 
   @Test
   void expectEqualSeedsToGiveEqualGrids() {
-    HashMap<Cell, CellStatus> aMap = new HashMap<>();
-    aMap.put(new Cell(1, 1), new CellStatus(true));
-    aMap.put(new Cell(2, 2), new CellStatus(true));
-    HashMap<Cell, CellStatus> anotherMap = new HashMap<>();
-    anotherMap.put(new Cell(1, 1), new CellStatus(true));
-    anotherMap.put(new Cell(2, 2), new CellStatus(true));
+    HashMap<Cell, Status> aMap = new HashMap<>();
+    aMap.put(new Cell(1, 1), new Status(true));
+    aMap.put(new Cell(2, 2), new Status(true));
+    HashMap<Cell, Status> anotherMap = new HashMap<>();
+    anotherMap.put(new Cell(1, 1), new Status(true));
+    anotherMap.put(new Cell(2, 2), new Status(true));
     assertEquals(new Grid(aMap), new Grid(anotherMap));
   }
 
   @Test
   void expectUnequalSeedsToGiveUnequalGrids() {
-    HashMap<Cell, CellStatus> aMap = new HashMap<>();
-    aMap.put(new Cell(1, 1), new CellStatus(true));
-    aMap.put(new Cell(2, 2), new CellStatus(true));
-    HashMap<Cell, CellStatus> anotherMap = new HashMap<>();
-    anotherMap.put(new Cell(2, 1), new CellStatus(true));
-    anotherMap.put(new Cell(2, 2), new CellStatus(true));
+    HashMap<Cell, Status> aMap = new HashMap<>();
+    aMap.put(new Cell(1, 1), new Status(true));
+    aMap.put(new Cell(2, 2), new Status(true));
+    HashMap<Cell, Status> anotherMap = new HashMap<>();
+    anotherMap.put(new Cell(2, 1), new Status(true));
+    anotherMap.put(new Cell(2, 2), new Status(true));
     assertNotEquals(new Grid(aMap), new Grid(anotherMap));
   }
 }

@@ -1,10 +1,10 @@
 package com.pathashala;
 
 //Represents the living state of a cell
-public class CellStatus {
+public class Status {
   private final boolean alive;
 
-  CellStatus(boolean alive) {
+  Status(boolean alive) {
     this.alive = alive;
   }
 
@@ -20,7 +20,7 @@ public class CellStatus {
     if (getClass() != other.getClass()) {
       return false;
     }
-    CellStatus otherStatus = (CellStatus) other;
+    Status otherStatus = (Status) other;
     return alive == otherStatus.alive;
   }
 

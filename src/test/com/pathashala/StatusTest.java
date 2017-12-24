@@ -4,34 +4,34 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class CellStatusTest {
+class StatusTest {
   @Test
   void expectAliveStatusToStayAlive() {
-    assertTrue(new CellStatus(true).isAlive());
+    assertTrue(new Status(true).isAlive());
   }
 
   @Test
   void expectDeadStatusToStayDead() {
-    assertFalse(new CellStatus(false).isAlive());
+    assertFalse(new Status(false).isAlive());
   }
 
   @Test
   void expectEqualAliveStatusToBeEqual() {
-    assertEquals(new CellStatus(true), new CellStatus(true));
+    assertEquals(new Status(true), new Status(true));
   }
 
   @Test
   void expectUnequalAliveStatusToBeUnequal() {
-    assertNotEquals(new CellStatus(false), new CellStatus(true));
+    assertNotEquals(new Status(false), new Status(true));
   }
 
   @Test
   void expectEqualAliveStatusToHaveEqualHashcode() {
-    assertEquals(new CellStatus(true).hashCode(), new CellStatus(true).hashCode());
+    assertEquals(new Status(true).hashCode(), new Status(true).hashCode());
   }
 
   @Test
   void expectUnequalAliveStatusToHaveUnequalHashcode() {
-    assertNotEquals(new CellStatus(true).hashCode(), new CellStatus(false).hashCode());
+    assertNotEquals(new Status(true).hashCode(), new Status(false).hashCode());
   }
 }

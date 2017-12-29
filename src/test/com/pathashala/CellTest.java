@@ -4,7 +4,8 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 class CellTest {
   @Test
@@ -13,11 +14,14 @@ class CellTest {
     int yCoordinate = 0;
     Cell aCell = new Cell(xCoordinate, yCoordinate);
     ArrayList<Cell> neighbours = new ArrayList<>();
-    for (int i = xCoordinate - 1; i <= xCoordinate + 1; i++) {
-      for (int j = yCoordinate - 1; j <= yCoordinate + 1; j++) {
-        neighbours.add(new Cell(i, j));
-      }
-    }
+    neighbours.add(new Cell(-1, -1));
+    neighbours.add(new Cell(-1, 0));
+    neighbours.add(new Cell(-1, 1));
+    neighbours.add(new Cell(0, -1));
+    neighbours.add(new Cell(0, 1));
+    neighbours.add(new Cell(1, -1));
+    neighbours.add(new Cell(1, 0));
+    neighbours.add(new Cell(1, 1));
     neighbours.remove(aCell);
     assertEquals(neighbours, aCell.neighbours());
   }
@@ -28,11 +32,14 @@ class CellTest {
     int yCoordinate = 4;
     Cell aCell = new Cell(xCoordinate, yCoordinate);
     ArrayList<Cell> neighbours = new ArrayList<>();
-    for (int i = xCoordinate - 1; i <= xCoordinate + 1; i++) {
-      for (int j = yCoordinate - 1; j <= yCoordinate + 1; j++) {
-        neighbours.add(new Cell(i, j));
-      }
-    }
+    neighbours.add(new Cell(2, 3));
+    neighbours.add(new Cell(2, 4));
+    neighbours.add(new Cell(2, 5));
+    neighbours.add(new Cell(3, 3));
+    neighbours.add(new Cell(3, 5));
+    neighbours.add(new Cell(4, 3));
+    neighbours.add(new Cell(4, 4));
+    neighbours.add(new Cell(4, 5));
     neighbours.remove(aCell);
     assertEquals(neighbours, aCell.neighbours());
   }

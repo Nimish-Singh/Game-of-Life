@@ -3,7 +3,8 @@ package com.pathashala;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -14,11 +15,8 @@ class GameOfLifeTest {
     ArrayList<Cell> cellList = new ArrayList<>();
     Cell aCell = new Cell(9, 9);
     cellList.add(aCell);
-    HashMap<Cell, Status> map = new HashMap<>();
-    map.put(aCell, new Status(true));
-    ArrayList<Cell> neighbours = aCell.neighbours();
-    neighbours.forEach(neighbour -> map.put(neighbour, new Status(false)));
-    assertEquals(new Grid(map), game.createSeed(cellList));
+    Set<Cell> initialUniverse = new HashSet<>(cellList);
+    assertEquals(new Universe(initialUniverse), game.createSeed(cellList));
   }
 
   @Test
@@ -29,18 +27,8 @@ class GameOfLifeTest {
     Cell anotherCell = new Cell(9, 8);
     cellList.add(aCell);
     cellList.add(anotherCell);
-    HashMap<Cell, Status> map = new HashMap<>();
-    map.put(aCell, new Status(true));
-    map.put(anotherCell, new Status(true));
-    ArrayList<Cell> neighbours = aCell.neighbours();
-    neighbours.addAll(anotherCell.neighbours());
-    for (Cell neighbour : neighbours) {
-      if (map.containsKey(neighbour)) {
-        continue;
-      }
-      map.put(neighbour, new Status(false));
-    }
-    assertEquals(new Grid(map), game.createSeed(cellList));
+    Set<Cell> initialUniverse = new HashSet<>(cellList);
+    assertEquals(new Universe(initialUniverse), game.createSeed(cellList));
   }
 
   @Test
@@ -48,9 +36,9 @@ class GameOfLifeTest {
     GameOfLife game = new GameOfLife();
     ArrayList<Cell> cellList = new ArrayList<>();
     cellList.add(new Cell(1, 1));
-    Grid initial = game.createSeed(cellList);
-    HashMap<Cell, Status> empty = new HashMap<>();
-    assertEquals(new Grid(empty), game.tick(initial));
+    Universe initial = game.createSeed(cellList);
+    Set<Cell> empty = new HashSet<>();
+    assertEquals(new Universe(empty), game.tick(initial));
   }
 
   @Test
@@ -61,13 +49,13 @@ class GameOfLifeTest {
     cellList.add(new Cell(1, 2));
     cellList.add(new Cell(2, 1));
     cellList.add(new Cell(2, 2));
-    Grid initial = game.createSeed(cellList);
-    HashMap<Cell, Status> latter = new HashMap<>();
-    latter.put(new Cell(1, 1), new Status(true));
-    latter.put(new Cell(1, 2), new Status(true));
-    latter.put(new Cell(2, 1), new Status(true));
-    latter.put(new Cell(2, 2), new Status(true));
-    assertEquals(new Grid(latter), game.tick(initial));
+    Universe initial = game.createSeed(cellList);
+    Set<Cell> latter = new HashSet<>();
+    latter.add(new Cell(1, 1));
+    latter.add(new Cell(1, 2));
+    latter.add(new Cell(2, 1));
+    latter.add(new Cell(2, 2));
+    assertEquals(new Universe(latter), game.tick(initial));
   }
 
   @Test
@@ -79,14 +67,14 @@ class GameOfLifeTest {
     cellList.add(new Cell(2, 1));
     cellList.add(new Cell(0, 2));
     cellList.add(new Cell(1, 2));
-    Grid initial = game.createSeed(cellList);
-    HashMap<Cell, Status> latter = new HashMap<>();
-    latter.put(new Cell(0, 1), new Status(true));
-    latter.put(new Cell(1, 0), new Status(true));
-    latter.put(new Cell(2, 1), new Status(true));
-    latter.put(new Cell(0, 2), new Status(true));
-    latter.put(new Cell(1, 2), new Status(true));
-    assertEquals(new Grid(latter), game.tick(initial));
+    Universe initial = game.createSeed(cellList);
+    Set<Cell> latter = new HashSet<>();
+    latter.add(new Cell(0, 1));
+    latter.add(new Cell(1, 0));
+    latter.add(new Cell(2, 1));
+    latter.add(new Cell(0, 2));
+    latter.add(new Cell(1, 2));
+    assertEquals(new Universe(latter), game.tick(initial));
   }
 
   @Test
@@ -96,12 +84,12 @@ class GameOfLifeTest {
     cellList.add(new Cell(1, 1));
     cellList.add(new Cell(1, 0));
     cellList.add(new Cell(1, 2));
-    Grid initial = game.createSeed(cellList);
-    HashMap<Cell, Status> latter = new HashMap<>();
-    latter.put(new Cell(1, 1), new Status(true));
-    latter.put(new Cell(0, 1), new Status(true));
-    latter.put(new Cell(2, 1), new Status(true));
-    assertEquals(new Grid(latter), game.tick(initial));
+    Universe initial = game.createSeed(cellList);
+    Set<Cell> latter = new HashSet<>();
+    latter.add(new Cell(1, 1));
+    latter.add(new Cell(0, 1));
+    latter.add(new Cell(2, 1));
+    assertEquals(new Universe(latter), game.tick(initial));
   }
 
   @Test
@@ -114,14 +102,14 @@ class GameOfLifeTest {
     cellList.add(new Cell(2, 2));
     cellList.add(new Cell(2, 3));
     cellList.add(new Cell(2, 4));
-    Grid initial = game.createSeed(cellList);
-    HashMap<Cell, Status> latter = new HashMap<>();
-    latter.put(new Cell(0, 2), new Status(true));
-    latter.put(new Cell(1, 1), new Status(true));
-    latter.put(new Cell(1, 4), new Status(true));
-    latter.put(new Cell(2, 1), new Status(true));
-    latter.put(new Cell(2, 4), new Status(true));
-    latter.put(new Cell(3, 3), new Status(true));
-    assertEquals(new Grid(latter), game.tick(initial));
+    Universe initial = game.createSeed(cellList);
+    Set<Cell> latter = new HashSet<>();
+    latter.add(new Cell(0, 2));
+    latter.add(new Cell(1, 1));
+    latter.add(new Cell(1, 4));
+    latter.add(new Cell(2, 1));
+    latter.add(new Cell(2, 4));
+    latter.add(new Cell(3, 3));
+    assertEquals(new Universe(latter), game.tick(initial));
   }
 }

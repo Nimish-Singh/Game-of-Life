@@ -24,11 +24,6 @@ public class Cell {
   }
 
   @Override
-  public String toString() {
-    return (xCoordinate + ", " + yCoordinate);
-  }
-
-  @Override
   public boolean equals(Object other) {
     if (this == other) {
       return true;
@@ -48,5 +43,10 @@ public class Cell {
     int result = xCoordinate;
     result = 31 * result + yCoordinate;
     return result;
+  }
+
+  @Override
+  public String toString() {
+    return (xCoordinate + ", " + yCoordinate + "\t");
   }
 }

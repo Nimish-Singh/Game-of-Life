@@ -1,6 +1,7 @@
 package com.pathashala;
 
 import java.util.ArrayList;
+import java.util.stream.IntStream;
 
 //Represents the smallest unit on a 2-D grid
 public class Cell {
@@ -14,11 +15,10 @@ public class Cell {
 
   ArrayList<Cell> neighbours() {
     ArrayList<Cell> neighbours = new ArrayList<>();
-    for (int i = xCoordinate - 1; i <= xCoordinate + 1; i++) {
-      for (int j = yCoordinate - 1; j <= yCoordinate + 1; j++) {
-        neighbours.add(new Cell(i, j));
-      }
-    }
+    IntStream.range(-1,2)
+            .forEach(row -> IntStream.range(-1,2)
+            .forEach(column -> neighbours
+            .add(new Cell(xCoordinate+row, yCoordinate+column))));
     neighbours.remove(this);
     return neighbours;
   }

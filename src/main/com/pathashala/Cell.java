@@ -15,10 +15,10 @@ public class Cell {
 
   ArrayList<Cell> neighbours() {
     ArrayList<Cell> neighbours = new ArrayList<>();
-    IntStream.range(-1,2)
-            .forEach(row -> IntStream.range(-1,2)
-            .forEach(column -> neighbours
-            .add(new Cell(xCoordinate+row, yCoordinate+column))));
+    IntStream.range(-1, 2)
+            .forEach(row -> IntStream.range(-1, 2)
+                    .forEach(column -> neighbours
+                            .add(new Cell(xCoordinate + row, yCoordinate + column))));
     neighbours.remove(this);
     return neighbours;
   }

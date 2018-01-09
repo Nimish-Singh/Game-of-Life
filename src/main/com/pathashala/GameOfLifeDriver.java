@@ -12,6 +12,9 @@ public class GameOfLifeDriver {
     Universe initial = game.createSeed(cellList);
     Universe afterTick = game.tick(initial);
     afterTick.show();
+    System.out.println(game.patternType(initial));
+    System.out.println(game.numberOfGenerationsNeededToBecomeStablePattern(initial));
+    System.out.println(game.numberOfGenerationsNeededToBecomeRepeatingPattern(initial));
   }
 
   static private List<Cell> takeInput() {

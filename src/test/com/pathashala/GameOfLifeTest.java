@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 
+import static com.pathashala.GameOfLife.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class GameOfLifeTest {
@@ -111,5 +112,99 @@ class GameOfLifeTest {
     latter.add(new Cell(2, 4));
     latter.add(new Cell(3, 3));
     assertEquals(new Universe(latter), game.tick(initial));
+  }
+
+  @Test
+  void expectBlockPatternToBeTermedAsStable() {
+    GameOfLife game = new GameOfLife();
+    ArrayList<Cell> cellList = new ArrayList<>();
+    cellList.add(new Cell(1, 1));
+    cellList.add(new Cell(1, 2));
+    cellList.add(new Cell(2, 1));
+    cellList.add(new Cell(2, 2));
+    Universe initial = game.createSeed(cellList);
+    assertEquals(STABLE_PATTERN, game.patternType(initial));
+  }
+
+  @Test
+  void expectBlinkerPatternToBeTermedAsRepeating() {
+    GameOfLife game = new GameOfLife();
+    ArrayList<Cell> cellList = new ArrayList<>();
+    cellList.add(new Cell(1, 1));
+    cellList.add(new Cell(1, 0));
+    cellList.add(new Cell(1, 2));
+    Universe initial = game.createSeed(cellList);
+    assertEquals(REPEATING_PATTERN, game.patternType(initial));
+  }
+
+  @Test
+  void expectRandomPatternToBeTermedAsNoneOfTheTwo() {
+    GameOfLife game = new GameOfLife();
+    ArrayList<Cell> cellList = new ArrayList<>();
+    cellList.add(new Cell(1, 1));
+    cellList.add(new Cell(3, 0));
+    cellList.add(new Cell(5, 2));
+    Universe initial = game.createSeed(cellList);
+    assertEquals(NEITHER_STABLE_NOR_REAPEATING, game.patternType(initial));
+  }
+
+  @Test
+  void expectToReceiveNumberOfGenerationsNeededForRepetitionForBlinkerPattern() {
+    GameOfLife game = new GameOfLife();
+    ArrayList<Cell> cellList = new ArrayList<>();
+    cellList.add(new Cell(1, 1));
+    cellList.add(new Cell(1, 0));
+    cellList.add(new Cell(1, 2));
+    Universe initial = game.createSeed(cellList);
+    assertEquals(REPETITION_PATTERN_GENERATION_NUMBER + "2", game.numberOfGenerationsNeededToBecomeRepeatingPattern(initial));
+  }
+
+  @Test
+  void expectToReceiveNumberOfGenerationsNeededForStabilityForBlockPattern() {
+    GameOfLife game = new GameOfLife();
+    ArrayList<Cell> cellList = new ArrayList<>();
+    cellList.add(new Cell(1, 1));
+    cellList.add(new Cell(2, 2));
+    cellList.add(new Cell(1, 2));
+    cellList.add(new Cell(2, 1));
+    Universe initial = game.createSeed(cellList);
+    assertEquals(STABLE_PATTERN_GENERATION_NUMBER + "1", game.numberOfGenerationsNeededToBecomeStablePattern(initial));
+  }
+
+  @Test
+  void expectBlinkerPatternNotToBecomeStable() {
+    GameOfLife game = new GameOfLife();
+    ArrayList<Cell> cellList = new ArrayList<>();
+    cellList.add(new Cell(1, 1));
+    cellList.add(new Cell(1, 0));
+    cellList.add(new Cell(1, 2));
+    Universe initial = game.createSeed(cellList);
+    assertEquals(NO_STABILITY_AFTER_DECIDED_NUMBER_OF_GENERATIONS, game.numberOfGenerationsNeededToBecomeStablePattern(initial));
+  }
+
+  @Test
+  void expectGliderPatternNotToBecomeRepeating() {
+    GameOfLife game = new GameOfLife();
+    ArrayList<Cell> cellList = new ArrayList<>();
+    cellList.add(new Cell(1, 1));
+    cellList.add(new Cell(2, 1));
+    cellList.add(new Cell(3, 1));
+    cellList.add(new Cell(3, 2));
+    cellList.add(new Cell(2, 3));
+    Universe initial = game.createSeed(cellList);
+    assertEquals(NO_REPETITION_AFTER_DECIDED_NUMBER_OF_GENERATIONS, game.numberOfGenerationsNeededToBecomeRepeatingPattern(initial));
+  }
+
+  @Test
+  void expectGliderPatternNotToBecomeStable() {
+    GameOfLife game = new GameOfLife();
+    ArrayList<Cell> cellList = new ArrayList<>();
+    cellList.add(new Cell(1, 1));
+    cellList.add(new Cell(2, 1));
+    cellList.add(new Cell(3, 1));
+    cellList.add(new Cell(3, 2));
+    cellList.add(new Cell(2, 3));
+    Universe initial = game.createSeed(cellList);
+    assertEquals(NO_STABILITY_AFTER_DECIDED_NUMBER_OF_GENERATIONS, game.numberOfGenerationsNeededToBecomeStablePattern(initial));
   }
 }
